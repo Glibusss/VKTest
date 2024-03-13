@@ -41,7 +41,7 @@ export const UserForm = () => {
                     <FormItem>
                         <Button onClick={fetchAge}>Get Age</Button>
                     </FormItem>
-                    <Text>Your Age: {nameAge.age? nameAge.age:'unknown'}</Text>
+                    <Text>{nameAge.age? `Your Age: ${nameAge.age}`:''}</Text>
                 </Panel>
             </View>
             </div>
