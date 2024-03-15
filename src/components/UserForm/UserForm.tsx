@@ -16,18 +16,34 @@ export const UserForm = () => {
 
     const [nameAge, setNameAge] = useState<NameAge>({name:'',count:0,age:0});
     const nameInputRef = useRef<HTMLInputElement>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     let timer: ReturnType<typeof setTimeout>;
 
     async function fetchAge(){
+
         let name = '';
+
         clearTimeout(timer);
+
         if(nameInputRef.current)
             name = nameInputRef.current.value;
+
         timer=setTimeout(async ()=>{
+
+            if(loading)
+                return;
+
+            setLoading(true);
+
             const response = await NameAgeService.getAgeByName(name);
-        setNameAge(response);
-    }, 3000)
+
+            setNameAge(response);
+
+            setLoading(false);
+
+    }, 3000);
+
     }
 
     return (
